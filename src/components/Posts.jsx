@@ -2,19 +2,19 @@ import { useState } from "react";
 import dataBlog from "./Data";
 
 function Posts() {
-  const [like, setLike] = useState(dataBlog.map((item) => item.likes));
-  // console.log(like);
+  const [like, setLike] = useState(dataBlog);
+  console.log(like);
 
   const handleLike = (index) => {
     const newLike = [...like];
-    newLike[index] = newLike[index] + 1;
+    newLike[index].likes = newLike[index].likes + 1;
     setLike(newLike);
   };
 
   const handleDislike = (index) => {
-    if (like[index] > 0) {
-      const newDislike = [...like];
-      newDislike[index] = newDislike[index] - 1;
+    const newDislike = [...like];
+    if (newDislike[index].likes > 0) {
+      newDislike[index].likes = newDislike[index].likes - 1;
       setLike(newDislike);
     }
   };
@@ -30,7 +30,7 @@ function Posts() {
                 <h2>{item.title}</h2>
                 <div className="post-social-media-stats">
                   <span className="stats-topic">Likes: </span>
-                  <span className="post-likes">{like[index]}</span>
+                  <span className="post-likes">{item.likes}</span>
                 </div>
               </div>
               <p className="post-content">{item.content}</p>
